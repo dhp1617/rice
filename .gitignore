@@ -1,0 +1,12 @@
+# Backups
+*.bak
+*.bak-*
+rice-backup-*
+
+# Caches
+.cache/
+*.qslog
+
+# Editor junk
+.vscode/
+*.swp
