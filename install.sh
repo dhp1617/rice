@@ -1,95 +1,78 @@
 #!/bin/bash
-# install.sh — self-contained Hyprland rice installer
+# install.sh — restore this rice on a fresh Arch install
 set -e
 
-RICE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+RICE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKUP="$HOME/rice-backup-$(date +%Y%m%d-%H%M)"
 
-echo "→ Installing rice from $RICE_DIR"
+echo "→ Installing rice from $RICE"
 
-# ---------- Backup ----------
+# ---------- Backup existing ----------
 mkdir -p "$BACKUP"
-for d in hypr kitty quickshell ambxst; do
+for d in hypr kitty waybar quickshell ambxst; do
     [ -e "$HOME/.config/$d" ] && cp -r "$HOME/.config/$d" "$BACKUP/" && echo "  backed up ~/.config/$d"
 done
-[ -e "$HOME/.local/share/ambxst" ] && cp -r "$HOME/.local/share/ambxst" "$BACKUP/"
-[ -e "$HOME/.local/src/ambxst" ]   && cp -r "$HOME/.local/src/ambxst"   "$BACKUP/"
-echo "→ Backup saved: $BACKUP"
+[ -e "$HOME/.local/src/ambxst" ] && cp -r "$HOME/.local/src/ambxst" "$BACKUP/"
+[ -e "$HOME/bin" ] && cp -r "$HOME/bin" "$BACKUP/"
 
-# ---------- Dependency check ----------
+# ---------- Dependencies ----------
 echo "→ Checking dependencies..."
 MISSING=""
-for pkg in hyprland hyprpaper kitty matugen curl jq go; do
+for pkg in hyprland hyprpaper kitty waybar rofi pavucontrol grim slurp wl-clipboard tlp brightnessctl matugen curl jq go; do
     command -v $pkg >/dev/null 2>&1 || MISSING="$MISSING $pkg"
 done
-if [ -n "$MISSING" ]; then
-    echo "  ⚠ Missing:$MISSING"
-    echo "  Install with: sudo pacman -S$MISSING"
-    read -p "  Continue anyway? [y/N] " ans
-    [ "$ans" != "y" ] && exit 1
-fi
+[ -n "$MISSING" ] && echo "  ⚠ Missing:$MISSING" && echo "  Install: sudo pacman -S$MISSING"
 
-# ---------- Ambxst: copy source ----------
-echo "→ Installing Ambxst source..."
+# ---------- Ambxst source ----------
+echo "→ Ambxst source → ~/.local/src/ambxst"
 mkdir -p ~/.local/src
 rm -rf ~/.local/src/ambxst
-cp -r "$RICE_DIR/ambxst/src" ~/.local/src/ambxst
+cp -r "$RICE/ambxst/src" ~/.local/src/ambxst
 
-# ---------- Ambxst: build ----------
+# ---------- Ambxst build ----------
 echo "→ Building Ambxst..."
 cd ~/.local/src/ambxst
-if [ -f Makefile ]; then
-    make build
-    if [ -f ambxst ]; then
-        mkdir -p ~/.local/bin
-        cp ambxst ~/.local/bin/ambxst
-        chmod +x ~/.local/bin/ambxst
-        echo "  ✓ installed to ~/.local/bin/ambxst"
-    else
-        echo "  ✗ build did not produce binary — check manually"
-        exit 1
-    fi
-else
-    echo "  ✗ no Makefile found"
-    exit 1
+[ -f Makefile ] && make build
+if [ -f ambxst ]; then
+    mkdir -p ~/.local/bin
+    cp ambxst ~/.local/bin/ambxst
+    chmod +x ~/.local/bin/ambxst
+    echo "  ✓ ~/.local/bin/ambxst"
 fi
 
-# ---------- Hyprland ----------
-echo "→ Installing Hyprland config"
+# ---------- Configs ----------
+echo "→ Hyprland"
 mkdir -p ~/.config/hypr/scripts
-cp "$RICE_DIR/hypr/hyprland.lua" ~/.config/hypr/
-cp "$RICE_DIR/hypr/scripts/"*.sh ~/.config/hypr/scripts/
+cp "$RICE/hypr/hyprland.lua" ~/.config/hypr/
+cp "$RICE/hypr/scripts/"*.sh ~/.config/hypr/scripts/
 chmod +x ~/.config/hypr/scripts/*.sh
 
-# ---------- Quickshell widgets ----------
-echo "→ Installing Quickshell widgets"
-mkdir -p ~/.config/quickshell/widgets
-cp "$RICE_DIR/quickshell/widgets/"*.qml ~/.config/quickshell/widgets/
-
-# ---------- Kitty ----------
-echo "→ Installing Kitty config"
+echo "→ Kitty"
 mkdir -p ~/.config/kitty
-cp "$RICE_DIR/kitty/kitty.conf" ~/.config/kitty/
+cp "$RICE/kitty/kitty.conf" ~/.config/kitty/
 
-# ---------- Ambxst config ----------
-echo "→ Installing Ambxst config"
+echo "→ Waybar"
+mkdir -p ~/.config/waybar
+cp -r "$RICE/waybar/"* ~/.config/waybar/
+
+echo "→ Ambxst config"
 mkdir -p ~/.config/ambxst
-cp -r "$RICE_DIR/ambxst/config/"* ~/.config/ambxst/ 2>/dev/null || true
+cp -r "$RICE/ambxst/config/"* ~/.config/ambxst/
 mkdir -p ~/.local/share/ambxst
-cp "$RICE_DIR/ambxst/axctl.toml" ~/.local/share/ambxst/ 2>/dev/null || true
+cp "$RICE/ambxst/axctl.toml" ~/.local/share/ambxst/
 
-# ---------- PATH check ----------
+echo "→ ~/bin scripts"
+mkdir -p ~/bin
+cp "$RICE/bin/"*.sh ~/bin/
+chmod +x ~/bin/*.sh
+
+# ---------- PATH ----------
 if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
     echo ""
-    echo "⚠ ~/.local/bin is not in PATH. Add to ~/.bashrc or ~/.zshrc:"
-    echo "    export PATH=\"\$HOME/.local/bin:\$PATH\""
+    echo "⚠ Add to ~/.bashrc or ~/.zshrc:"
+    echo "    export PATH=\"\$HOME/.local/bin:\$HOME/bin:\$PATH\""
 fi
 
 echo ""
-echo "✓ Install complete."
-echo ""
-echo "Next steps:"
-echo "  1. Ensure ~/.local/bin is on PATH (see above if warned)"
-echo "  2. Log out and back into Hyprland"
-echo ""
-echo "Restore point: $BACKUP"
+echo "✓ Done. Log out, log back in."
+echo "Backup: $BACKUP"

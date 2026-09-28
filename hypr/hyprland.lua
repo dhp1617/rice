@@ -72,7 +72,7 @@ load_ambxst_borders()
 
 hl.monitor({
 	output = "eDP-1",
-	mode = "1920x1080@144",
+	mode = "1920x1080@60",
 	position = "auto",
 	scale = "1",
 })
@@ -92,11 +92,9 @@ local menu = "ambxst run launcher"
 hl.on("hyprland.start", function ()
 
     hl.exec_cmd("nm-applet")
+    hl.exec_cmd("/home/dhp/.config/hypr/scripts/border-watcher.sh")
     hl.exec_cmd("ambxst")
     hl.exec_cmd("sleep 1; bash ~/.config/hypr/scripts/theme.sh /home/dhp/Pictures/.wallpaper/image.png")
-    hl.exec_cmd("quickshell -p ~/.config/quickshell/widgets/CalendarWidget.qml &")
-    hl.exec_cmd("quickshell -p ~/.config/quickshell/widgets/StatsWidget.qml &")
-    hl.exec_cmd("quickshell -p ~/.config/quickshell/widgets/CryptoWidget.qml &")
 end)
 
 
@@ -156,6 +154,9 @@ hl.config({
 		enabled = true,
 	},
 })
+
+
+
 
 -- Curves and animations
 hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
@@ -268,6 +269,7 @@ hl.bind(
         action = "toggle"
     })
 )
+hl.bind("SUPER + B", hl.dsp.exec_cmd("/home/dhp/bin/rice-mode.sh toggle"))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))

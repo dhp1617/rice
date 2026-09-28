@@ -2,7 +2,7 @@
   "disks": [
     "/"
   ],
-  "updateServiceEnabled": true,
+  "updateServiceEnabled": false,
   "idle": {
     "general": {
       "lock_cmd": "ambxst lock",
@@ -13,16 +13,16 @@
       {
         "onResume": "axctl brightness restore",
         "onTimeout": "axctl brightness save && axctl brightness set 0.1",
-        "timeout": 150
+        "timeout": 600
       },
       {
         "onTimeout": "loginctl lock-session",
-        "timeout": 300
+        "timeout": 600
       },
       {
         "onResume": "ambxst screen on",
         "onTimeout": "ambxst screen off",
-        "timeout": 330
+        "timeout": 600
       },
       {
         "onTimeout": "ambxst suspend",
@@ -42,7 +42,7 @@
   "pomodoro": {
     "workTime": 59,
     "restTime": 300,
-    "autoStart": true,
+    "autoStart": false,
     "syncSpotify": false
   },
   "clipboard": {

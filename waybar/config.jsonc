@@ -1,0 +1,38 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+  "spacing": 6,
+  "modules-left":   ["hyprland/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right":  ["network", "cpu", "memory", "battery", "pulseaudio", "tray"],
+
+  "hyprland/workspaces": {
+    "format": "{id}",
+    "on-click": "activate"
+  },
+  "clock": {
+    "format": "{:%H:%M}",
+    "tooltip-format": "{:%A, %B %d, %Y}"
+  },
+  "cpu": { "format": " {usage}%", "interval": 3 },
+  "memory": { "format": " {percentage}%", "interval": 3 },
+  "battery": {
+    "format": "{icon} {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "states": { "warning": 30, "critical": 15 }
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-icons": ["", "", ""],
+    "on-click": "pavucontrol"
+  },
+  "network": {
+    "format-wifi": " {essid}",
+    "format-ethernet": " {ifname}",
+    "format-disconnected": " off",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+    "on-click": "bash ~/bin/wifi-picker.sh"
+  },
+  "tray": { "icon-size": 14, "spacing": 6 }
+}

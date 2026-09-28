@@ -13,8 +13,8 @@ outer = 4
 
 [appearance.border]
 width = 2
-active_color = "rgb(9ccbfb)"
-inactive_color = "rgb(202326)"
+active_color = "rgb(ffb4a8)"
+inactive_color = "rgb(282120)"
 rounding = 16
 
 [appearance.opacity]
