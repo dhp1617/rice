@@ -340,15 +340,7 @@ hl.window_rule({
 	move = "20 monitor_h-120",
 	float = true,
 })
--- DEBUG BINDS
-hl.bind("SUPER + F10", hl.dsp.exec_cmd("notify-send DEBUG F10"))
-hl.bind("SUPER + F11", hl.dsp.exec_cmd("notify-send DEBUG F11"))
-hl.bind("SUPER + R", hl.dsp.exec_cmd("notify-send DEBUG R"))
-hl.bind("SUPER + r", hl.dsp.exec_cmd("notify-send DEBUG lowerR"))
-hl.bind("SUPER + D", hl.dsp.exec_cmd("notify-send DEBUG D"))
-hl.bind("SUPER + d", hl.dsp.exec_cmd("notify-send DEBUG lowerD"))
-hl.bind("SUPER + TAB", hl.dsp.exec_cmd("notify-send DEBUG TAB"))
-hl.bind("SUPER + COMMA", hl.dsp.exec_cmd("notify-send DEBUG COMMA"))
+
 
 -- ═══ Ambxst keybinds (absolute paths) ═══
 hl.bind("SUPER + R", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run launcher"))
