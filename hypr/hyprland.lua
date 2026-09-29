@@ -8,7 +8,9 @@
 -- https://wiki.hypr.land/Configuring/Start/
 -- Load Wallust-generated colors
 
-hl.env("PATH", "/home/dhp/.local/bin:/home/dhp/bin:" .. os.getenv("PATH"))
+-- After all hl.env() lines:
+hl.env("PATH", "/home/dhp/.local/bin:/home/dhp/bin:/usr/local/sbin:/usr/local/bin:/usr/bin")
+
 local function set_wallpaper(path)
     local conf = io.open(os.getenv("HOME") .. "/.config/hypr/hyprpaper.conf", "w")
     if conf then
@@ -83,7 +85,7 @@ hl.monitor({
 
 local terminal = "kitty"
 local fileManager = "nautilus"
-local menu = "/home/dhp/.local/bin/ambxst run launcher"
+local menu = "ambxst run launcher"
 
 -------------------
 ---- AUTOSTART ----
@@ -347,3 +349,24 @@ hl.bind("SUPER + D", hl.dsp.exec_cmd("notify-send DEBUG D"))
 hl.bind("SUPER + d", hl.dsp.exec_cmd("notify-send DEBUG lowerD"))
 hl.bind("SUPER + TAB", hl.dsp.exec_cmd("notify-send DEBUG TAB"))
 hl.bind("SUPER + COMMA", hl.dsp.exec_cmd("notify-send DEBUG COMMA"))
+
+-- ═══ Ambxst keybinds (absolute paths) ═══
+hl.bind("SUPER + R", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run launcher"))
+hl.bind("SUPER + D", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run dashboard"))
+hl.bind("SUPER + A", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run assistant"))
+hl.bind("SUPER + V", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run clipboard"))
+hl.bind("SUPER + PERIOD", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run emoji"))
+hl.bind("SUPER + N", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run notes"))
+hl.bind("SUPER + T", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run tmux"))
+hl.bind("SUPER + COMMA", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run wallpapers"))
+hl.bind("SUPER + TAB", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run overview"))
+hl.bind("SUPER + ESCAPE", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run powermenu"))
+hl.bind("SUPER + SHIFT + C", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run config"))
+hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run screenshot"))
+hl.bind("SUPER + SHIFT + R", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run screenrecord"))
+hl.bind("SUPER + SHIFT + A", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run lens"))
+hl.bind("SUPER + S", hl.dsp.exec_cmd("/home/dhp/.local/bin/ambxst run tools"))
+hl.bind("SUPER + L", hl.dsp.exec_cmd("loginctl lock-session"))
+
+-- PATH fix for Hyprland-spawned commands
+hl.env("PATH", "/home/dhp/.local/bin:/home/dhp/bin:" .. (os.getenv("PATH") or "/usr/local/bin:/usr/bin"))
