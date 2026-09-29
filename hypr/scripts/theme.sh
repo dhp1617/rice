@@ -6,7 +6,11 @@ echo "$W" > ~/.cache/current-wallpaper
 
 # Wallpaper
 cat > ~/.config/hypr/hyprpaper.conf <<EOF
-wallpaper { monitor = ; path = $W; fit_mode = cover }
+wallpaper {
+    monitor = 
+    path = $W
+    fit_mode = cover
+}
 splash = false
 ipc = on
 EOF

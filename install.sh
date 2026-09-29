@@ -33,11 +33,16 @@ cp -r "$RICE/ambxst/src" ~/.local/src/ambxst
 echo "→ Building Ambxst..."
 cd ~/.local/src/ambxst
 [ -f Makefile ] && make build
-if [ -f ambxst ]; then
-    mkdir -p ~/.local/bin
-    cp ambxst ~/.local/bin/ambxst
-    chmod +x ~/.local/bin/ambxst
-    echo "  ✓ ~/.local/bin/ambxst"
+if [ -f axctl ]; then
+    cp axctl ~/.local/bin/axctl
+    chmod +x ~/.local/bin/axctl
+    echo "  ✓ ~/.local/bin/axctl"
+fi
+
+# axctl — official binary
+if ! command -v axctl >/dev/null 2>&1; then
+    curl -fsSL get.axeni.de/axctl | sh
+    echo "  ✓ axctl installed"
 fi
 
 # ---------- Configs ----------

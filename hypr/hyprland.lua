@@ -8,7 +8,7 @@
 -- https://wiki.hypr.land/Configuring/Start/
 -- Load Wallust-generated colors
 
-
+hl.env("PATH", "/home/dhp/.local/bin:/home/dhp/bin:" .. os.getenv("PATH"))
 local function set_wallpaper(path)
     local conf = io.open(os.getenv("HOME") .. "/.config/hypr/hyprpaper.conf", "w")
     if conf then
@@ -83,7 +83,7 @@ hl.monitor({
 
 local terminal = "kitty"
 local fileManager = "nautilus"
-local menu = "ambxst run launcher"
+local menu = "/home/dhp/.local/bin/ambxst run launcher"
 
 -------------------
 ---- AUTOSTART ----
@@ -92,9 +92,8 @@ local menu = "ambxst run launcher"
 hl.on("hyprland.start", function ()
 
     hl.exec_cmd("nm-applet")
-    hl.exec_cmd("/home/dhp/.config/hypr/scripts/border-watcher.sh")
-    hl.exec_cmd("ambxst")
-    hl.exec_cmd("sleep 1; bash ~/.config/hypr/scripts/theme.sh /home/dhp/Pictures/.wallpaper/image.png")
+    hl.exec_cmd("/home/dhp/.local/bin/ambxst")
+    hl.exec_cmd("sleep 1; bash ~/.config/hypr/scripts/theme.sh /home/dhp/Pictures/wallpapers/image.png")
 end)
 
 
@@ -254,7 +253,6 @@ hl.device({
 ---------------------
 
 local mainMod = "SUPER"
-
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + w", hl.dsp.window.close())
 hl.bind(
@@ -270,11 +268,8 @@ hl.bind(
     })
 )
 hl.bind("SUPER + B", hl.dsp.exec_cmd("/home/dhp/bin/rice-mode.sh toggle"))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
-hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd("ambxst run powermenu"))
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("ambxst run calendar"))
 
 -- Screenshot Region to Clipboard & Save to Pictures via Alt + Shift + S
 hl.bind("ALT + SHIFT + S", hl.dsp.exec_cmd('grim -g "$(slurp)" - | tee ~/Pictures/screenshot_$(date +%Y%m%d_%H%M%S).png | wl-copy'))
@@ -343,11 +338,12 @@ hl.window_rule({
 	move = "20 monitor_h-120",
 	float = true,
 })
-
-
-
-
-
-
-
---HYPRGLASSS--
+-- DEBUG BINDS
+hl.bind("SUPER + F10", hl.dsp.exec_cmd("notify-send DEBUG F10"))
+hl.bind("SUPER + F11", hl.dsp.exec_cmd("notify-send DEBUG F11"))
+hl.bind("SUPER + R", hl.dsp.exec_cmd("notify-send DEBUG R"))
+hl.bind("SUPER + r", hl.dsp.exec_cmd("notify-send DEBUG lowerR"))
+hl.bind("SUPER + D", hl.dsp.exec_cmd("notify-send DEBUG D"))
+hl.bind("SUPER + d", hl.dsp.exec_cmd("notify-send DEBUG lowerD"))
+hl.bind("SUPER + TAB", hl.dsp.exec_cmd("notify-send DEBUG TAB"))
+hl.bind("SUPER + COMMA", hl.dsp.exec_cmd("notify-send DEBUG COMMA"))
