@@ -18,11 +18,20 @@ done
 # ---------- Dependencies ----------
 echo "→ Checking dependencies..."
 MISSING=""
-for pkg in hyprland hyprpaper kitty waybar rofi pavucontrol grim slurp wl-clipboard tlp brightnessctl matugen curl jq go; do
+for pkg in hyprland hyprpaper hyprpolkitagent kitty waybar rofi pavucontrol \
+           grim slurp wl-clipboard cliphist brightnessctl tlp \
+           tesseract tesseract-data-eng libnotify zbar curl jq xdg-utils \
+           imagemagick matugen go git base-devel \
+           ttf-jetbrains-mono-nerd ttf-iosevka-nerd ttf-phosphor-icons \
+           ttf-roboto noto-fonts noto-fonts-emoji \
+           nautilus sushi gthumb sddm; do
     command -v $pkg >/dev/null 2>&1 || MISSING="$MISSING $pkg"
 done
-[ -n "$MISSING" ] && echo "  ⚠ Missing:$MISSING" && echo "  Install: sudo pacman -S$MISSING"
-
+if [ -n "$MISSING" ]; then
+    echo "  ⚠ Missing:$MISSING"
+    echo "  Run: sudo pacman -S$MISSING"
+    echo "  Or:  yay -S ttf-phosphor-icons ttf-iosevka-nerd"
+fi
 # ---------- Ambxst source ----------
 echo "→ Ambxst source → ~/.local/src/ambxst"
 mkdir -p ~/.local/src

@@ -92,7 +92,7 @@ local menu = "ambxst run launcher"
 -------------------
 
 hl.on("hyprland.start", function ()
-
+    hl.exec_cmd("pkill slurp 2>/dev/null")
     hl.exec_cmd("nm-applet")
     hl.exec_cmd("/home/dhp/.local/bin/ambxst")
     hl.exec_cmd("sleep 1; bash ~/.config/hypr/scripts/theme.sh /home/dhp/Pictures/wallpapers/image.png")

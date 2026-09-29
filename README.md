@@ -62,3 +62,25 @@ All widgets:
 git clone https://github.com/YOUR_USER/rice.git ~/rice
 cd ~/rice
 ./install.sh
+
+
+## Post-install checklist
+
+1. **Fonts** — install all required:
+   ```bash
+   sudo pacman -S ttf-jetbrains-mono-nerd ttf-roboto noto-fonts noto-fonts-emoji
+   yay -S ttf-iosevka-nerd ttf-phosphor-icons
+
+   sudo pacman -S tesseract tesseract-data-eng libnotify zbar curl jq xdg-utils
+
+   curl -fsSL get.axeni.de/axctl | sh
+
+   sudo pacman -S nvidia-open-dkms nvidia-utils nvidia-settings nvidia-prime
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+
+
+   export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+
+   
+
+	   
