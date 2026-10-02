@@ -1,5 +1,22 @@
 # Hyprland Rice
 
+One-command install of Hyprland + Ambxst + Waybar + custom battery/theme scripts.
+
+## Install
+
+bash
+git clone https://github.com/dhp1617/rice.git ~/rice
+cd ~/rice
+./install.sh
+sudo mkinitcpio -P
+sudo reboot
+
+
+
+
+
+# Hyprland Rice
+
 A dynamic, wallpaper-themed Hyprland desktop with custom Quickshell widgets.
 
 ## ✨ Features

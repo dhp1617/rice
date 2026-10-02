@@ -6,27 +6,27 @@ exec-once = "ambxst"
 
 [appearance]
 [appearance.gaps]
-inner = 2
-outer = 4
+inner = 4
+outer = 8
 
 [appearance.border]
 width = 2
 active_color = "rgb(7d7871)"
 inactive_color = "rgb(292727)"
-rounding = 16
+rounding = 12
 
 [appearance.opacity]
 active = 1.0
-inactive = 1.0
+inactive = 0.88
 
 [appearance.blur]
 enabled = true
-size = 4
-passes = 2
+size = 8
+passes = 4
 
 [appearance.shadow]
 enabled = true
-size = 8
+size = 10
 color = "rgba(00000080)"
 
 [appearance.animations]

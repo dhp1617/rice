@@ -2,3 +2,4 @@
 *.bak-*
 rice-backup-*
 *.log
+*.qslog

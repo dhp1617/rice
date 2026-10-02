@@ -22,49 +22,7 @@ local function set_wallpaper(path)
     end
     hl.exec_cmd("pkill -x hyprpaper; sleep 0.3; hyprpaper &")
 end
--- Load Ambxst-generated border colors from axctl.toml
-local function load_ambxst_borders()
-    local path = os.getenv("HOME") .. "/.local/share/ambxst/axctl.toml"
-    local f = io.open(path, "r")
-    if not f then return end
 
-    local active, inactive, width = nil, nil, nil
-    local in_section = false
-    for line in f:lines() do
-        if line:match("^%[appearance%.border%]") then
-            in_section = true
-        elseif line:match("^%[") then
-            in_section = false
-        elseif in_section then
-            local k, v = line:match('^(%w+)%s*=%s*"([^"]+)"')
-            if k == "active_color" then active = v
-            elseif k == "inactive_color" then inactive = v
-            end
-            local w = line:match('^width%s*=%s*(%d+)')
-            if w then width = tonumber(w) end
-        end
-    end
-    f:close()
-
-    if active and inactive then
-        -- Strip "rgb(...)" wrapper, Hyprland expects hex without #
-        local a = active:match("rgb%((%w+)%)")
-        local i = inactive:match("rgb%((%w+)%)")
-        if a and i then
-            hl.config({
-                general = {
-                    border_size = width or 2,
-                    col = {
-                        active_border = { colors = { "rgb(" .. a .. ")", "rgb(" .. a .. ")" }, angle = 45 },
-                        inactive_border = "rgb(" .. i .. ")",
-                    },
-                },
-            })
-        end
-    end
-end
-
-load_ambxst_borders()
 
 
 
@@ -92,10 +50,9 @@ local menu = "ambxst run launcher"
 -------------------
 
 hl.on("hyprland.start", function ()
-    hl.exec_cmd("pkill slurp 2>/dev/null")
-    hl.exec_cmd("nm-applet")
-    hl.exec_cmd("/home/dhp/.local/bin/ambxst")
-    hl.exec_cmd("sleep 1; bash ~/.config/hypr/scripts/theme.sh /home/dhp/Pictures/wallpapers/image.png")
+    hl.exec_cmd("nm-applet &")
+    
+    hl.exec_cmd("/home/dhp/.local/bin/ambxst &")
 end)
 
 
@@ -114,46 +71,12 @@ hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 -----------------------
 ---- LOOK AND FEEL ----
 -----------------------
-
+-- Window opacity (Ambxst doesn't manage this, so it's safe here)
 hl.config({
-	general = {
-		gaps_in = 4,
-		gaps_out = 8,
-
-		border_size = 2,
-
-
-
-		resize_on_border = false,
-		allow_tearing = false,
-		layout = "dwindle",
-	},
-
-	decoration = {
-		rounding = 12,
-		rounding_power = 2,
-
-		active_opacity = 1,
-		inactive_opacity = 0.88,
-
-		shadow = {
-			enabled = true,
-			range = 10,
-			render_power = 3,
-			color = 0x99080c0e,
-		},
-
-		blur = {
-			enabled = true,
-			size = 8,
-			passes = 4,
-			vibrancy = 0.2,
-		},
-	},
-
-	animations = {
-		enabled = true,
-	},
+    decoration = {
+        active_opacity = 1.0,
+        inactive_opacity = 0.9,
+    },
 })
 
 

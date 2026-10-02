@@ -1,0 +1,193 @@
+{
+  "ambxst": {
+    "system": {
+      "overview": {
+        "modifiers": [
+          "SUPER"
+        ],
+        "key": "TAB",
+        "action": {
+          "id": "ambxst.overview",
+          "args": {}
+        }
+      },
+      "powermenu": {
+        "modifiers": [
+          "SUPER"
+        ],
+        "key": "ESCAPE",
+        "action": {
+          "id": "ambxst.powermenu",
+          "args": {}
+        }
+      },
+      "config": {
+        "modifiers": [
+          "SUPER",
+          "SHIFT"
+        ],
+        "key": "C",
+        "action": {
+          "id": "ambxst.config",
+          "args": {}
+        }
+      },
+      "lockscreen": {
+        "modifiers": [
+          "SUPER"
+        ],
+        "key": "L",
+        "action": {
+          "id": "system.lock",
+          "args": {}
+        }
+      },
+      "tools": {
+        "modifiers": [
+          "SUPER"
+        ],
+        "key": "S",
+        "action": {
+          "id": "ambxst.tools",
+          "args": {}
+        }
+      },
+      "screenshot": {
+        "modifiers": [
+          "SUPER",
+          "SHIFT"
+        ],
+        "key": "S",
+        "action": {
+          "id": "ambxst.screenshot",
+          "args": {}
+        }
+      },
+      "screenrecord": {
+        "modifiers": [
+          "SUPER",
+          "SHIFT"
+        ],
+        "key": "R",
+        "action": {
+          "id": "ambxst.screenrecord",
+          "args": {}
+        }
+      },
+      "lens": {
+        "modifiers": [
+          "SUPER",
+          "SHIFT"
+        ],
+        "key": "A",
+        "action": {
+          "id": "ambxst.lens",
+          "args": {}
+        }
+      },
+      "reload": {
+        "modifiers": [
+          "SUPER",
+          "ALT"
+        ],
+        "key": "B",
+        "action": {
+          "id": "ambxst.reload",
+          "args": {}
+        }
+      },
+      "quit": {
+        "modifiers": [
+          "SUPER",
+          "CTRL",
+          "ALT"
+        ],
+        "key": "B",
+        "action": {
+          "id": "ambxst.quit",
+          "args": {}
+        }
+      }
+    },
+    "launcher": {
+      "modifiers": [
+        "SUPER"
+      ],
+      "key": "Super_L",
+      "action": {
+        "id": "ambxst.launcher",
+        "args": {}
+      }
+    },
+    "dashboard": {
+      "modifiers": [
+        "SUPER"
+      ],
+      "key": "D",
+      "action": {
+        "id": "ambxst.dashboard",
+        "args": {}
+      }
+    },
+    "assistant": {
+      "modifiers": [
+        "SUPER"
+      ],
+      "key": "A",
+      "action": {
+        "id": "ambxst.assistant",
+        "args": {}
+      }
+    },
+    "clipboard": {
+      "modifiers": [
+        "SUPER"
+      ],
+      "key": "V",
+      "action": {
+        "id": "ambxst.clipboard",
+        "args": {}
+      }
+    },
+    "emoji": {
+      "modifiers": [
+        "SUPER"
+      ],
+      "key": "PERIOD",
+      "action": {
+        "id": "ambxst.emoji",
+        "args": {}
+      }
+    },
+    "notes": {
+      "modifiers": [
+        "SUPER"
+      ],
+      "key": "N",
+      "action": {
+        "id": "ambxst.notes",
+        "args": {}
+      }
+    },
+    "tmux": {
+      "modifiers": [
+        "SUPER"
+      ],
+      "key": "T",
+      "action": {
+        "id": "ambxst.tmux",
+        "args": {}
+      }
+    },
+    "wallpapers": {
+      "modifiers": [
+        "SUPER"
+      ],
+      "key": "COMMA",
+      "action": {
+        "id": "ambxst.wallpapers",
+        "args": {}
+      }
+    }
+  }
+}
