@@ -1,3 +1,29 @@
+# My Hyprland Rice
+
+**Self-contained** — includes the full patched Ambxst source. No upstream dependency.
+
+## Install (fresh Arch)
+```bash
+sudo pacman -S git
+git clone https://github.com/dhp1617/rice.git ~/rice
+cd ~/rice
+./install.sh
+sudo mkinitcpio -P
+sudo reboot
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Hyprland Rice
 
 One-command install of Hyprland + Ambxst + Waybar + custom battery/theme scripts.
